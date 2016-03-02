@@ -7,6 +7,12 @@ from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 
+try:
+    from django.forms.utils import flatatt
+except:
+    def flatatt(a):
+        return ' '.join(map(lambda x: '{0}="{1}"'.format(*x), a.items()))
+
 
 class JSONEditorWidget(widgets.Widget):
 
